@@ -1,15 +1,15 @@
 import React from 'react';
-// import { Header } from "../solution/ex01/Header";
-// import { Card } from "../solution/ex01/Card";
+import { Card } from './Card';
+import { Header } from './Header';
 
 const message = 'React @ SFEIR';
 
 export const App: React.FunctionComponent = () => {
 	return (
 		<>
-			<header>replace this header with the Header component</header>
+			<Header />
 			<main>
-				put the Card component here and pass "{message}" as title prop
+				<Card title={message} />
 			</main>
 		</>
 	);
