@@ -1,26 +1,29 @@
 import React from 'react';
 import { Card, CardHeader, CardImage, CardInfo } from './Card';
 
-type PersonCardProps = {};
+type PersonCardProps = {
+	randomPerson: Person
+};
 
-export const PersonCard: React.FC<PersonCardProps> = () => (
+export const PersonCard: React.FC<PersonCardProps> = ({ randomPerson }) => (
 	<Card>
 		<CardImage
-			url="https://randomuser.me/portraits/women/85.jpg"
-			desc="face of Leanne"
+			url={randomPerson.photo}
+			desc={`face of ${randomPerson.firstname}`}
 		/>
 		<CardHeader
-			title={<a href="/person/5763cd4d9d2a4f259b53c901">Leanne Woodard</a>}
-			subTitle="Developer"
+			title={<a href={'/person/' + randomPerson.id}>{`${randomPerson.firstname} ${randomPerson.lastname}`}</a>}
+			subTitle={randomPerson.position}
 		/>
 		<CardInfo icon="email">
-			<a href="mailto:Leanne.Woodard@BIOSPAN.com">woodard.l@acme.com</a>
+			{/* ToDo: Check href*/}
+			<a href={`mailto:${randomPerson.email}`}>{randomPerson.email}</a>
 		</CardInfo>
 		<CardInfo icon="phone">
-			<a href="tel:0784112248">0784112248</a>
+			<a href={'tel:' + randomPerson.phone}>{randomPerson.phone}</a>
 		</CardInfo>
 		<CardInfo icon="supervisor_account" desc="manager">
-			<a href="/person/5763cd4d3b57c672861bfa1f">Erika</a>
+			<a href={'/person/' + randomPerson.managerId}>{randomPerson.manager}</a>
 		</CardInfo>
 	</Card>
 );
