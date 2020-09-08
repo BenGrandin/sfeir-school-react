@@ -1,9 +1,8 @@
-import { connect } from "react-redux";
-import { savePerson, loadPeople } from "../utils";
+import { connect } from 'react-redux';
+import { loadPeople, savePerson } from '../utils';
 
 // import selectors and action creators
 // they are the public API of the state
-import {} from "./state";
 
 // implement the with... HOCs
 // so they work for App
@@ -12,29 +11,29 @@ import {} from "./state";
 
 // the former ones for reference:
 const withPeople = connect(state => ({
-  people: state.people || []
+	people: state.people || []
 }));
 
 const withLoading = connect(
-  state => ({
-    loading: state.people === null
-  }),
-  dispatch => ({
-    loadPeople: () =>
-      loadPeople().then(people => dispatch({ type: "SET_PEOPLE", people }))
-  })
+	state => ({
+		loading: state.people === null
+	}),
+	dispatch => ({
+		loadPeople: () =>
+			loadPeople().then(people => dispatch({ type: 'SET_PEOPLE', people }))
+	})
 );
 
 const withPerson = connect(
-  (state, { personId }) => ({
-    person: state.people && state.people.find(p => p.id === personId)
-  }),
-  dispatch => ({
-    onUpdate: person =>
-      savePerson(person).then(person =>
-        dispatch({ type: "SET_PERSON", person })
-      )
-  })
+	(state, { personId }) => ({
+		person: state.people && state.people.find(p => p.id === personId)
+	}),
+	dispatch => ({
+		onUpdate: person =>
+			savePerson(person).then(person =>
+				dispatch({ type: 'SET_PERSON', person })
+			)
+	})
 );
 
 // the new ones to implement:

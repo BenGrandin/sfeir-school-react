@@ -1,13 +1,13 @@
 /*global React ReactDOM*/
 
 const InputApp = () => {
-  const value = "Sfeir";
+	const value = 'Sfeir';
 
-  return (
-    <>
-      <div>Hello {value}</div>
-    </>
-  );
+	return (
+		<>
+			<div>Hello {value}</div>
+		</>
+	);
 };
 
-ReactDOM.render(<InputApp />, document.getElementById("root"));
+ReactDOM.render(<InputApp />, document.getElementById('root'));

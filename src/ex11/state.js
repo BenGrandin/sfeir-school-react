@@ -1,9 +1,9 @@
 const initialState = {
-  people: {
-    map: {},
-    all: null
-  },
-  query: ""
+	people: {
+		map: {},
+		all: null
+	},
+	query: ''
 };
 
 // change the reducer so it produces state values
@@ -20,25 +20,25 @@ const initialState = {
 // query field
 
 export const reducer = (state = initialState, action) => {
-  switch (action.type) {
-    case "SET_PEOPLE":
-      return {
-        people: action.people
-      };
-    case "SET_PERSON":
-      return {
-        people: state.people.map(p =>
-          p.id === action.person.id ? action.person : p
-        )
-      };
-    default:
-      return state;
-  }
+	switch (action.type) {
+		case 'SET_PEOPLE':
+			return {
+				people: action.people
+			};
+		case 'SET_PERSON':
+			return {
+				people: state.people.map(p =>
+					p.id === action.person.id ? action.person : p
+				)
+			};
+		default:
+			return state;
+	}
 };
 
 // implement all selectors and action creators needed in ./connect
 
 export const getPersonById = (state, personId) =>
-  state.people.find(p => p.id === personId);
+	state.people.find(p => p.id === personId);
 
 // ... and all the others

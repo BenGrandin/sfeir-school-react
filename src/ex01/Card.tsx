@@ -3,7 +3,7 @@
 // pass it a title prop
 
 type CardProps = {
-  title: string;
+	title: string;
 };
 
 export const Card = undefined;

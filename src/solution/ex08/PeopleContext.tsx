@@ -1,18 +1,18 @@
-import React, { createContext, useState, useEffect } from "react";
-import { loadPeople } from "../../utils";
+import React, { createContext, useEffect, useState } from 'react';
+import { loadPeople } from '../../utils';
 
 export const PeopleContext = createContext<People>([]);
 
 export const PeopleProvider = ({ children }) => {
-  const [people, setPeople] = useState<People>([]);
+	const [people, setPeople] = useState<People>([]);
 
-  useEffect(() => {
-    loadPeople().then(setPeople);
-  }, []);
+	useEffect(() => {
+		loadPeople().then(setPeople);
+	}, []);
 
-  return (
-    <PeopleContext.Provider value={people}>{children}</PeopleContext.Provider>
-  );
+	return (
+		<PeopleContext.Provider value={people}>{children}</PeopleContext.Provider>
+	);
 };
 
 export const WithPeople = PeopleContext.Consumer;

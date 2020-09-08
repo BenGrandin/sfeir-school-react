@@ -1,33 +1,33 @@
-import React from "react";
+import React from 'react';
 
-import { PersonCard } from "../solution/PersonCard";
+import { PersonCard } from '../solution/PersonCard';
 
 // cycle through the people array when clicking the previous
 // and the next buttons. Look in ../utils.js for some utility
 // functions you may need.
 
 type FabProps = {
-  icon: string;
+	icon: string;
 };
 
 const Fab: React.FC<FabProps> = ({ icon }) => (
-  <button className="mdc-fab mdc-fab--mini">
-    <i className="rmwc-icon material-icons mdc-fab__icon">{icon}</i>
-  </button>
+	<button className="mdc-fab mdc-fab--mini">
+		<i className="rmwc-icon material-icons mdc-fab__icon">{icon}</i>
+	</button>
 );
 
 type CarouselProps = {
-  people: People;
+	people: People;
 };
 
 export const Carousel: React.FC<CarouselProps> = ({ people }) => (
-  <div className="flex-row">
-    <Fab icon="skip_previous" />
-    <div className="carousel">
-      <PersonCard person={people[0]} className="current" />
-    </div>
-    <Fab icon="skip_next" />
-  </div>
+	<div className="flex-row">
+		<Fab icon="skip_previous" />
+		<div className="carousel">
+			<PersonCard person={people[0]} className="current" />
+		</div>
+		<Fab icon="skip_next" />
+	</div>
 );
 
 // when you are done:

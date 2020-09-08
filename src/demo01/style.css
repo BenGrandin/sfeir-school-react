@@ -1,16 +1,16 @@
 body {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-family: sans-serif;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	font-family: sans-serif;
 }
 
 button:focus {
-  outline: none;
+	outline: none;
 }
 
 #root {
-  transform: scale(3);
+	transform: scale(3);
 }

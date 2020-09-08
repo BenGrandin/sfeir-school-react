@@ -1,7 +1,6 @@
-import { connect } from "react-redux";
-import { savePerson, loadPeople } from "../utils";
-import { State, Action } from "./state";
-import { Dispatch } from "redux";
+import { connect } from 'react-redux';
+import { Action, State } from './state';
+import { Dispatch } from 'redux';
 
 // provide people from state
 export const withPeople = connect((state: State) => ({}));
@@ -9,8 +8,8 @@ export const withPeople = connect((state: State) => ({}));
 // provide loading from state
 // and the loadPeople function dispatching SET_PEOPLE
 export const withLoading = connect(
-  (state: State) => ({}),
-  (dispatch: Dispatch<Action>) => ({})
+	(state: State) => ({}),
+	(dispatch: Dispatch<Action>) => ({})
 );
 
 // provide person from state using useSelector
