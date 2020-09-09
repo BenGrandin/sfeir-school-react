@@ -13,6 +13,8 @@ export const Carousel: React.FC<CarouselProps> = ({ people }) => {
 	const [setPrev, setNext] = useMemo(() => {
 		const { pred, succ } = range(0, people.length - 1);
 		return [() => setCurrentIndex(pred), () => setCurrentIndex(succ)];
+		// Todo : Why setCurrentIndex is a deps ? Isn't always the same?
+		// May he change when currentIndex change ?
 	}, [people, setCurrentIndex]);
 
 	return (

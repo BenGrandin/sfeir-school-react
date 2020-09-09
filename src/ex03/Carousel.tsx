@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useMemo, useState } from 'react';
 import { PersonCard } from '../solution/PersonCard';
 import { toRing } from '../utils';
 import { Fab } from '@rmwc/fab';
@@ -25,15 +25,15 @@ type CarouselProps = {
 
 export const Carousel: FC<CarouselProps> = ({ people }) => {
 	const [current, setCurrent] = useState(people[0]);
-	const { prev, next } = toRing(people, current);
+	const [onSkipPrevious, onSkipNext] = useMemo(() => {
+		const { prev, next } = toRing(people, current);
 
-	const onSkipPrevious = () => {
-		setCurrent(prev);
-	};
-
-	const onSkipNext = () => {
-		setCurrent(next);
-	};
+		return [() => {
+			setCurrent(prev);
+		}, () => {
+			setCurrent(next);
+		}];
+	}, [people, current]);
 
 	return (
 		<div className="flex-row">
