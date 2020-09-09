@@ -26,8 +26,6 @@ export const App: React.FC<AppProps> = ({ people }) => {
 
 			<main>
 				<br />
-				Omit the manager icon in PersonCard when there is none.
-				<br />
 				Rewrite the Carousel so it has no dependency on PersonCard.
 				<br />
 
