@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { TopAppBarActionItem } from '@rmwc/top-app-bar';
 
 import { Header } from '../solution/Header';
-import { Carousel } from '../ex03/Carousel';
+import { Carousel } from './Carousel';
 import { PersonCard } from '../ex02/PersonCard';
 
 type AppProps = {
@@ -10,8 +10,8 @@ type AppProps = {
 };
 
 export const App: React.FC<AppProps> = ({ people }) => {
-	const [isCarouselView, setIsCarouselView] = useState(false);
-
+	const [isCarouselView, setIsCarouselView] = useState(true);
+	const personCards = people.map((p) => <PersonCard randomPerson={p} key={p.id} />);
 
 	return (
 		<>
@@ -25,14 +25,10 @@ export const App: React.FC<AppProps> = ({ people }) => {
 			</Header>
 
 			<main>
-				<br />
-				Rewrite the Carousel so it has no dependency on PersonCard.
-				<br />
-
 				{
 					isCarouselView ?
-						<Carousel people={people} /> :
-						people.map((p) => <PersonCard key={p.id} randomPerson={p} />)
+						<Carousel>{personCards}</Carousel> :
+						personCards
 				}
 			</main>
 		</>

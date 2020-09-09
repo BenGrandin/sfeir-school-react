@@ -8,6 +8,9 @@ type CarouselProps = {
 };
 
 export const Carousel: React.FC<CarouselProps> = ({ children }) => {
+
+	// ToDo : isn't it heavy to pass all childrens ?
+	// In order to render only one ? (3 exactly here)
 	const childArray = React.Children.toArray(children) as React.ReactElement[];
 	const [currentIndex, setCurrentIndex] = useState(0);
 	const { pred, succ } = range(0, childArray.length - 1);

@@ -1,7 +1,10 @@
 import React from 'react';
 
-export const Card: React.FC = ({ children }) => (
-	<section className="mdc-card">
+export const Card: React.FC<{
+	children: React.ReactNode;
+	className: string;
+}> = ({ children, className }) => (
+	<section className={'mdc-card ' + className}>
 		<div className="card-content content-type-person-info">{children}</div>
 	</section>
 );

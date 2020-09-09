@@ -2,11 +2,12 @@ import React from 'react';
 import { Card, CardHeader, CardImage, CardInfo } from './Card';
 
 type PersonCardProps = {
-	randomPerson: Person
+	randomPerson: Person;
+	className?: string;
 };
 
-export const PersonCard: React.FC<PersonCardProps> = ({ randomPerson }) => (
-	<Card>
+export const PersonCard: React.FC<PersonCardProps> = ({ randomPerson,className }) => (
+	<Card className={className}>
 		<CardImage
 			url={randomPerson.photo}
 			desc={`face of ${randomPerson.firstname}`}
