@@ -1,24 +1,23 @@
 import React, { FC, useState } from 'react';
-import '@rmwc/fab/styles';
-
 import { PersonCard } from '../solution/PersonCard';
-import { range, toRing } from '../utils';
+import { toRing } from '../utils';
+import { Fab } from '@rmwc/fab';
 
 // cycle through the people array when clicking the previous
 // and the next buttons. Look in ../utils.js for some utility
 // functions you may need.
 
-type FabProps = {
-	icon: string;
-	onClick?: () => void;
-};
+// type FabProps = {
+// 	icon: string;
+// 	onClick?: () => void;
+// };
 
-// Missing onClick ?
-const Fab: React.FC<FabProps> = ({ icon, onClick }) => (
-	<button className="mdc-fab mdc-fab--mini" onClick={onClick}>
-		<i className="rmwc-icon material-icons mdc-fab__icon">{icon}</i>
-	</button>
-);
+// // Missing onClick ?
+// const Fab: React.FC<FabProps> = ({ icon, onClick }) => (
+// 	<button className="mdc-fab mdc-fab--mini" onClick={onClick}>
+// 		<i className="rmwc-icon material-icons mdc-fab__icon">{icon}</i>
+// 	</button>
+// );
 
 type CarouselProps = {
 	people: People;
@@ -27,7 +26,6 @@ type CarouselProps = {
 export const Carousel: FC<CarouselProps> = ({ people }) => {
 	const [current, setCurrent] = useState(people[0]);
 	const { prev, next } = toRing(people, current);
-
 
 	const onSkipPrevious = () => {
 		setCurrent(prev);
@@ -43,7 +41,7 @@ export const Carousel: FC<CarouselProps> = ({ people }) => {
 			<div className="carousel">
 				<PersonCard person={current} className="current" />
 			</div>
-			<Fab icon="skip_next" onClick={onSkipNext}/>
+			<Fab icon="skip_next" onClick={onSkipNext} />
 		</div>
 	);
 };
