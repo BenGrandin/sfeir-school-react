@@ -25,13 +25,17 @@ main {
 }
 
 header.mdc-top-app-bar a {
-	display: inline-block;
+	display: flex;
+	align-items: center;
 	color: white;
 	font-weight: bold;
-	margin: 0 0.5em;
+	padding: 0 0.5em;
+	height: 100%;
+	text-transform: uppercase;
 
 	&.active {
-		text-decoration: underline;
+		color: #0168ab;
+		background: white;
 	}
 }
 
@@ -60,6 +64,10 @@ footer {
 	background-image: url("./app-bar-bg.png");
 	background-repeat: no-repeat;
 	background-position: right;
+
+	.mdc-top-app-bar__section {
+		padding: 0 0 0 12px;
+	}
 }
 
 img[alt="People logo"] {

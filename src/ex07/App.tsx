@@ -6,6 +6,7 @@ import { Loading } from '../solution/Loading';
 import { SearchableList } from '../solution/SearchableList';
 import { Player } from '../solution/Player';
 import { loadPeople } from '../utils';
+import { NavLink, Redirect, Route, Switch } from 'react-router-dom';
 
 export const App: React.FC = () => {
 	const [showList, setShowList] = useState(true);
@@ -23,9 +24,32 @@ export const App: React.FC = () => {
 	return (
 		<>
 			<Header>
-				<TopAppBarActionItem icon={toggleIcon} onClick={toggleView} />
+				<NavLink
+					to="/list"
+					activeClassName="active"
+					exact
+				>
+					list
+				</NavLink>
+				<NavLink
+					to="/player"
+					activeClassName="active"
+					exact
+				>
+					player
+				</NavLink>
 			</Header>
-			<CurrentView people={people} />
+
+			{
+				people.length === 0 ?
+					Loading :
+					<Switch>
+						<Route exact path="/list" render={() => <SearchableList people={people} />} />
+						<Route exact path="/player" render={() => <Player people={people} />} />
+						{/*<Route path="/:user" component={User} />*/}
+						<Redirect to="/list" />
+					</Switch>
+			}
 		</>
 	);
 };
