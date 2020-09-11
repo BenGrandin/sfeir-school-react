@@ -9,7 +9,7 @@ type PeopleContext = {
 	updatePerson: (person: Person) => Promise<void>;
 };
 
-const PeopleContext = createContext<PeopleContext>({
+export const PeopleContext = createContext<PeopleContext>({
 	people: [],
 	loading: true,
 	getPersonById: () => undefined,

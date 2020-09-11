@@ -1,16 +1,31 @@
 import React, { createContext, useEffect, useState } from 'react';
 import { loadPeople } from '../utils';
 
-export const PeopleContext = createContext<People>([]);
+type PeopleContext = {
+	people: People;
+	loading: boolean;
+	// getPersonById: (id: string) => Person | undefined;
+	// updatePerson: (person: Person) => Promise<void>;
+};
+
+export const PeopleContext = createContext<PeopleContext>({
+	people: [],
+	loading: null
+});
 
 export const PeopleProvider: React.FC = ({ children }) => {
-	const [people, setPeople] = useState<People>([]);
+	const [people, setPeople] = useState<People >([]);
+	const [loading, setLoading] = useState(false);
 
 	useEffect(() => {
-		loadPeople().then(setPeople);
+		setLoading(true);
+		loadPeople().then(setPeople).finally(() => {
+			setLoading(false);
+		});
 	}, []);
 
-	return (
-		<PeopleContext.Provider value={people}>{children}</PeopleContext.Provider>
-	);
+	const context = { loading, people };
+	console.log({ people });
+
+	return <PeopleContext.Provider value={context}>{children}</PeopleContext.Provider>;
 };
