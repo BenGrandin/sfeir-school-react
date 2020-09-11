@@ -1,8 +1,8 @@
-import React, { cloneElement, forwardRef, useImperativeHandle, useRef, useState } from 'react';
+import React, { cloneElement, forwardRef, useContext, useImperativeHandle, useRef, useState } from 'react';
 import { Fab } from '@rmwc/fab';
 import { range } from '../utils';
 import { PersonCard } from '../solution/PersonCard';
-import { PeopleConsumer } from '../ex08/PeopleContext';
+import { PeopleContext } from '../ex08/PeopleContext';
 
 // Todo : Interface vs Type ? Heritage ?
 type CarouselProps = {
@@ -32,13 +32,12 @@ const Carousel = forwardRef<CarouselApi, CarouselProps>(({ children }, ref) => {
 	};
 
 	useImperativeHandle(ref, () => ({ onSkipNext }));
-
 	return (
 		<div className="flex-row">
 			<Fab icon="skip_previous" mini onClick={onSkipPrevious} />
 			<div className="carousel">
 				{cards.map(([i, className]) =>
-					cloneElement(childArray[i], { className })
+					childArray.length >= 3 && cloneElement(childArray[i], { className })
 				)}
 			</div>
 			<Fab icon="skip_next" mini onClick={onSkipNext} />
@@ -46,27 +45,25 @@ const Carousel = forwardRef<CarouselApi, CarouselProps>(({ children }, ref) => {
 	);
 });
 
-type PlayerProps = {
-};
+type PlayerProps = {};
 
 export const Player: React.FC<PlayerProps> = () => {
+	const people = useContext(PeopleContext);
 	const carouselRef = useRef<CarouselApi>();
-
 	const onFabClick = () => {
 		carouselRef.current.onSkipNext();
 	};
 
 	return (
 		<>
-			<PeopleConsumer>
-				{people => <main>
-					<Carousel ref={carouselRef}>
-						{people.map(person => (
-							<PersonCard person={person} key={person.id} />
-						))}
-					</Carousel>
-				</main>}
-			</PeopleConsumer>
+			<main>
+				<Carousel ref={carouselRef}>
+					{people.map(person => (
+						<PersonCard person={person} key={person.id} />
+					))}
+				</Carousel>
+			</main>
+
 			<footer>
 				<Fab onClick={onFabClick} icon="skip_next" />
 			</footer>

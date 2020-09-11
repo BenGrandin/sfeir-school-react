@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { TextField } from '@rmwc/textfield';
 import { PersonCard } from '../solution/PersonCard';
 import { Loading } from '../solution/Loading';
-import { PeopleConsumer } from '../ex08/PeopleContext';
+import { PeopleContext } from '../ex08/PeopleContext';
 
 const containsSubstring = (str: string, sub: string): boolean => {
 	const re = new RegExp(sub.toLowerCase(), 'i');
@@ -17,6 +17,7 @@ type SearchableListProps = {};
 
 const DEFAULT_QUERY = '';
 export const SearchableList: React.FC<SearchableListProps> = () => {
+	const people = useContext(PeopleContext);
 	const [query, setQuery] = useState(DEFAULT_QUERY);
 
 	const resetQuery = () => {
@@ -25,21 +26,19 @@ export const SearchableList: React.FC<SearchableListProps> = () => {
 
 	return (
 		<>
-			<PeopleConsumer>
-				{people => (
-					people.length === 0 ?
-						<Loading /> :
-						<main>{
-							people
-								.filter(p => {
-									const fullName = p.firstname + ' ' + p.lastname;
-									return containsSubstring(fullName, query);
-								})
-								.map(toPersonCard)}
-						</main>
-				)}
-			</PeopleConsumer>
-			
+			{
+				people.length === 0 ?
+					<Loading /> :
+					<main>{people
+						.filter(p => {
+							const fullName = p.firstname + ' ' + p.lastname;
+							return containsSubstring(fullName, query);
+						})
+						.map(toPersonCard)
+					}
+					</main>
+			}
+
 			<footer>
 				<TextField
 					icon="search"
