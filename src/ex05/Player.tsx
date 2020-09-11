@@ -2,6 +2,7 @@ import React, { cloneElement, forwardRef, useImperativeHandle, useRef, useState 
 import { Fab } from '@rmwc/fab';
 import { range } from '../utils';
 import { PersonCard } from '../solution/PersonCard';
+import { PeopleConsumer } from '../ex08/PeopleContext';
 
 // Todo : Interface vs Type ? Heritage ?
 type CarouselProps = {
@@ -46,10 +47,9 @@ const Carousel = forwardRef<CarouselApi, CarouselProps>(({ children }, ref) => {
 });
 
 type PlayerProps = {
-	people: People;
 };
 
-export const Player: React.FC<PlayerProps> = ({ people }) => {
+export const Player: React.FC<PlayerProps> = () => {
 	const carouselRef = useRef<CarouselApi>();
 
 	const onFabClick = () => {
@@ -58,16 +58,19 @@ export const Player: React.FC<PlayerProps> = ({ people }) => {
 
 	return (
 		<>
-			<main>
-				<Carousel ref={carouselRef}>
-					{people.map(person => (
-						<PersonCard person={person} key={person.id} />
-					))}
-				</Carousel>
-			</main>
+			<PeopleConsumer>
+				{people => <main>
+					<Carousel ref={carouselRef}>
+						{people.map(person => (
+							<PersonCard person={person} key={person.id} />
+						))}
+					</Carousel>
+				</main>}
+			</PeopleConsumer>
 			<footer>
 				<Fab onClick={onFabClick} icon="skip_next" />
 			</footer>
 		</>
+
 	);
 };
